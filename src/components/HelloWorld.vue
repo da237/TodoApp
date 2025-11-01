@@ -2,6 +2,7 @@
 import {ref,onMounted } from 'vue';
 
 const imput = ref('');
+const text =  ref('');
 
 const listTasks = ref([]);
 
@@ -12,25 +13,29 @@ onMounted(() => {
 });
 
 const addTask = () => {
-  if(!imput.value){
+  if(!imput.value && text.value){
     alert('Ingrese una tarea');
     return;
   } else {
     listTasks.value.push({
     name: imput.value,
+    content: text.value,
     date: new Date().toLocaleDateString()
   });
   localStorage.setItem('listTasks', JSON.stringify(listTasks.value));
   }
   imput.value = '';
+  text.value = '';
   console.log(listTasks.value);
 }
 
 </script>
 <template>
   <div>
-    <label for="">Ingrese tarea</label>
+    <label for="">Ingrese Titulo</label>
     <input type="text" v-model="imput">
+    <label for="">Ingrese tarea</label>
+    <textarea v-model="text"></textarea>
 
     <button @click="addTask">Agregar Tarea</button>
 
@@ -39,7 +44,7 @@ const addTask = () => {
 
     <ul>
       <li v-for="(task,index) in listTasks" :key="index">
-        {{task.name}} - {{task.date}}
+        {{task.name}} - {{task.content}} - {{task.date}}
       </li>
     </ul>
   </div>
