@@ -1,12 +1,14 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import TaskForm from './components/TaskForm.vue'
+import TaskList from './components/TaskList.vue';
 </script>
 
 <template>
   <header>
   </header>
-  <HelloWorld></HelloWorld>
-
+  
+  <TaskForm />
+  <TaskList />
   <main>
   </main>
 </template>
