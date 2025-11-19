@@ -5,7 +5,8 @@ export const useTasksStore = defineStore('tasks', () => {
   const listTasks = ref(JSON.parse(localStorage.getItem('listTasks')) || [])
 
   const addTask = (name, content) => {
-    if (!name || !content) return
+    if (!name || !content) 
+      return
     listTasks.value.push({
       name,
       content,
@@ -17,6 +18,13 @@ export const useTasksStore = defineStore('tasks', () => {
     listTasks.value.splice(index, 1)
   }
 
+  const updateTask = (index,name,content) => {
+    listTasks.value[index].name = name
+    listTasks.value[index].content = content
+  }
+
+  
+
   watch(
     listTasks,
     (newList) => {
@@ -25,5 +33,5 @@ export const useTasksStore = defineStore('tasks', () => {
     { deep: true }
   )
 
-  return { listTasks, addTask, removeTask }
+  return { listTasks, addTask, removeTask, updateTask }
 })
